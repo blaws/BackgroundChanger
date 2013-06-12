@@ -1,4 +1,4 @@
-// Benjamin Laws, 5/23/13
+// Blaws, 5/23/13
 
 #include "aquaterm/aquaterm.h"
 #include <stdio.h>
