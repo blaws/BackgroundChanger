@@ -84,15 +84,22 @@ int main(void){
   while(fgets(names[i],1000,file)) i++;
   fclose(file);
   int quoteIndex = rand()%i;
+
   // break quote into lines
   int charsPerLine = windowW/20 - 5;
+  int currentIndex = 0;
   int quoteLines = strlen(names[quoteIndex])/(charsPerLine+5) + 1;
-  for(i=1;i<=quoteLines;i++){
+  char quote[quoteLines+1][charsPerLine+10];
+
+  for(i=0;i<quoteLines;i++){
     j=0;
-    while(names[quoteIndex+i-1][charsPerLine+j]!=' ') j++;
-    strcpy(names[quoteIndex+i],&names[quoteIndex+i-1][charsPerLine+j]);
-    names[quoteIndex+i-1][charsPerLine+j] = 0;
+    while(names[quoteIndex][currentIndex+charsPerLine+j]!=' ') j++;
+    strcpy(quote[i],&names[quoteIndex][currentIndex]);
+    currentIndex += charsPerLine+j;
+    quote[i][charsPerLine+j] = '\0';
   }
+  if(currentIndex!=strlen(names[quoteIndex])) strcpy(quote[i],&names[quoteIndex][currentIndex]);
+
 
   // add quote to screen buffer
   int currentY=50*quoteLines+50;
@@ -100,7 +107,7 @@ int main(void){
   aqtSetFontsize(40.0);
   aqtSetColor(rand()/(double)RAND_MAX,rand()/(double)RAND_MAX,rand()/(double)RAND_MAX);
   for(i=0;i<quoteLines;i++){
-    aqtAddLabel(names[quoteIndex+i],50,currentY,0,AQTAlignLeft);
+    aqtAddLabel(quote[i],50,currentY,0,AQTAlignLeft);
     currentY -= 50;
   }
 
