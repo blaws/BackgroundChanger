@@ -90,19 +90,23 @@ int main(void){
   int currentIndex = 0;
   int quoteLines = strlen(names[quoteIndex])/(charsPerLine+5) + 1;
   char quote[quoteLines+1][charsPerLine+10];
+  int currentY=50*quoteLines;
 
   for(i=0;i<quoteLines;i++){
     j=0;
-    while(names[quoteIndex][currentIndex+charsPerLine+j]!=' ') j++;
+    while(names[quoteIndex][currentIndex+charsPerLine+j]!=' ' && j<10) j++;
     strcpy(quote[i],&names[quoteIndex][currentIndex]);
     currentIndex += charsPerLine+j;
     quote[i][charsPerLine+j] = '\0';
   }
-  if(currentIndex!=strlen(names[quoteIndex])) strcpy(quote[i],&names[quoteIndex][currentIndex]);
+  if(currentIndex!=strlen(names[quoteIndex])){
+    strcpy(quote[i],&names[quoteIndex][currentIndex]);
+    quoteLines++;
+    currentY += 50;
+  }
 
 
   // add quote to screen buffer
-  int currentY=50*quoteLines+50;
   aqtSetFontname("Helvetica");
   aqtSetFontsize(40.0);
   aqtSetColor(rand()/(double)RAND_MAX,rand()/(double)RAND_MAX,rand()/(double)RAND_MAX);
