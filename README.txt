@@ -1,12 +1,9 @@
 BackgroundChanger
 blaws
 
-C program that resizes a random .bmp file from the current directory to 
-the screen size (1280x800 by default) and then pastes a random line from 
-quotes.txt near the bottom of the image.
+C program that pastes a random line from quotes.txt near the bottom of a 
+random .bmp image from the directory, outputing the result as BG.bmp. If 
+this file is set as the desktop background and the program is set to run 
+at startup, a new background will appear with every login.
 
-For a different screen size, change the windowW and windowH variables 
-near the top of the program.
-
-Written on Mac OSX 10.6.8; requires Aquaterm 
-(http://sourceforge.net/projects/aquaterm/).
+Written on Mac OSX 10.9.1.
