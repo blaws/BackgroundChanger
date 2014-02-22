@@ -6,7 +6,9 @@
 #include <time.h>
 #include <string.h>
 
-//define PIC_DIRECTORY "/Users/blaws/Pictures/Backgrounds"
+// CHANGE THIS TO THE LOCATION OF YOUR PICTURE DIRECTORY
+#define PIC_DIRECTORY "/Users/blaws/Pictures/Backgrounds"
+
 #define LINE_WIDTH 5
 #define LINE_HEIGHT 50
 
@@ -403,7 +405,7 @@ void addStringToImage(char* string, int* image, int imageWidth, int imageHeight,
         x += LINE_HEIGHT/2+LINE_WIDTH*2;
         break;
       case '-':
-        drawLine(image, imageWidth, imageHeight, color, x, y+LINE_HEIGHT/2, LINE_HEIGHT/3, LINE_WIDTH, M_PI/2);
+        drawLine(image, imageWidth, imageHeight, color, x, y+2*LINE_HEIGHT/3, LINE_HEIGHT/3, LINE_WIDTH, M_PI/2);
         x += LINE_HEIGHT/3+LINE_WIDTH;
         break;
       case '"':
@@ -469,12 +471,12 @@ void addStringToImage(char* string, int* image, int imageWidth, int imageHeight,
 int main(void){
   srand(time(NULL));
   //int windowW=1280,windowH=800;
-  char PIC_DIRECTORY[1000], command[1024];
-  FILE* file = popen("pwd", "r");
-  if(!file){ printf("System command error: pwd\n"); exit(1); }
-  fgets(PIC_DIRECTORY, sizeof(PIC_DIRECTORY), file);
-  pclose(file);
-  sscanf(PIC_DIRECTORY, "%s\n", PIC_DIRECTORY); // get rid of newline
+  char /*PIC_DIRECTORY[1000],*/ command[1024];
+  FILE* file /*= popen("pwd", "r")*/;
+  //if(!file){ printf("System command error: pwd\n"); exit(1); }
+  //fgets(PIC_DIRECTORY, sizeof(PIC_DIRECTORY), file);
+  //pclose(file);
+  //sscanf(PIC_DIRECTORY, "%s\n", PIC_DIRECTORY); // get rid of newline
   //printf("%s\n", PIC_DIRECTORY);
 
   // get list of .bmp files in directory
