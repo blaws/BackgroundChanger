@@ -446,6 +446,18 @@ void addStringToImage(char* string, int* image, int imageWidth, int imageHeight,
         drawLine(image, imageWidth, imageHeight, color, x+LINE_HEIGHT/4, y+LINE_HEIGHT-LINE_WIDTH, LINE_WIDTH, LINE_WIDTH, M_PI/2);
         x += LINE_HEIGHT/2+LINE_WIDTH;
         break;
+      case '(':
+        drawArc(image, imageWidth, imageHeight, color, x+LINE_HEIGHT/4+LINE_WIDTH/2, y+LINE_HEIGHT/4+LINE_WIDTH/2, LINE_HEIGHT/4+LINE_WIDTH/2, M_PI/2, M_PI);
+        drawLine(image, imageWidth, imageHeight, color, x, y+3*LINE_HEIGHT/4, LINE_WIDTH, LINE_HEIGHT/2, M_PI/2);
+        drawArc(image, imageWidth, imageHeight, color, x+LINE_HEIGHT/4+LINE_WIDTH/2, y+3*LINE_HEIGHT/4, LINE_HEIGHT/4+LINE_WIDTH/2, M_PI, 3*M_PI/2);
+        x += LINE_HEIGHT/4+LINE_WIDTH;
+	break;
+      case ')':
+        drawArc(image, imageWidth, imageHeight, color, x, y+LINE_HEIGHT/4+LINE_WIDTH/2, LINE_HEIGHT/4+LINE_WIDTH/2, 0, M_PI/2);
+        drawLine(image, imageWidth, imageHeight, color, x+LINE_HEIGHT/4-LINE_WIDTH/2, y+3*LINE_HEIGHT/4, LINE_WIDTH, LINE_HEIGHT/2, M_PI/2);
+        drawArc(image, imageWidth, imageHeight, color, x, y+3*LINE_HEIGHT/4, LINE_HEIGHT/4+LINE_WIDTH/2, 3*M_PI/2, 2*M_PI);
+        x += LINE_HEIGHT/4+LINE_WIDTH;
+	break;
       case ' ':
         if(imageWidth-x < LINE_HEIGHT*4){
           x = xi+LINE_HEIGHT/2;
@@ -464,6 +476,11 @@ void addStringToImage(char* string, int* image, int imageWidth, int imageHeight,
         x = xi+LINE_HEIGHT/2;
         y += LINE_HEIGHT*1.5;
         break;
+      default:
+        drawLine(image, imageWidth, imageHeight, color, x, y+LINE_HEIGHT, LINE_WIDTH, LINE_HEIGHT, M_PI/2);
+        drawLine(image, imageWidth, imageHeight, color, x+LINE_WIDTH, y+LINE_HEIGHT, LINE_WIDTH, LINE_HEIGHT, M_PI/2);
+        drawLine(image, imageWidth, imageHeight, color, x+2*LINE_WIDTH, y+LINE_HEIGHT, LINE_WIDTH, LINE_HEIGHT, M_PI/2);
+        x += 4*LINE_WIDTH;
     }
   }
 }
@@ -573,7 +590,7 @@ int main(void){
   for(i=0;i<3;++i) color[i] = rand()%256;
 
   // test string
-  //addStringToImage("AaBbCcDdEeFfGgHhIiJjKkLlMmNn\nNnOoPpQqRrSsTtUuVvWwXxYyZz00\n00112233445566778899!!::;;,,..??", colorArray, width, abs(height), color, LINE_HEIGHT/2, LINE_HEIGHT/2);
+  //addStringToImage("AaBbCcDdEeFfGgHhIiJjKkLlMmNn\nNnOoPpQqRrSsTtUuVvWwXxYyZz00\n00112233445566778899!!::;;,,..?\?(())~~", colorArray, width, abs(height), color, LINE_HEIGHT/2, LINE_HEIGHT/2);
 
   //for(i=0;i<quoteLines;++i){
   addStringToImage(/*quote[i]*/names[quoteIndex], colorArray, width, abs(height), color, LINE_HEIGHT/2, currentY);
