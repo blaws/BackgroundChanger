@@ -458,6 +458,18 @@ void addStringToImage(char* string, int* image, int imageWidth, int imageHeight,
         drawArc(image, imageWidth, imageHeight, color, x, y+3*LINE_HEIGHT/4, LINE_HEIGHT/4+LINE_WIDTH/2, 3*M_PI/2, 2*M_PI);
         x += LINE_HEIGHT/4+LINE_WIDTH;
 	break;
+      case '[':
+        drawLine(image, imageWidth, imageHeight, color, x, y+LINE_HEIGHT, LINE_WIDTH, LINE_HEIGHT, M_PI/2);
+        drawLine(image, imageWidth, imageHeight, color, x, y+LINE_HEIGHT, LINE_HEIGHT/4, LINE_WIDTH, M_PI/2);
+        drawLine(image, imageWidth, imageHeight, color, x, y+LINE_WIDTH, LINE_HEIGHT/4, LINE_WIDTH, M_PI/2);
+        x += LINE_HEIGHT/4+LINE_WIDTH;
+	break;
+      case ']':
+        drawLine(image, imageWidth, imageHeight, color, x+LINE_HEIGHT/4-LINE_WIDTH, y+LINE_HEIGHT, LINE_WIDTH, LINE_HEIGHT, M_PI/2);
+        drawLine(image, imageWidth, imageHeight, color, x, y+LINE_HEIGHT, LINE_HEIGHT/4, LINE_WIDTH, M_PI/2);
+        drawLine(image, imageWidth, imageHeight, color, x, y+LINE_WIDTH, LINE_HEIGHT/4, LINE_WIDTH, M_PI/2);
+        x += LINE_HEIGHT/4+LINE_WIDTH;
+	break;
       case ' ':
         if(imageWidth-x < LINE_HEIGHT*4){
           x = xi+LINE_HEIGHT/2;
@@ -590,7 +602,7 @@ int main(void){
   for(i=0;i<3;++i) color[i] = rand()%256;
 
   // test string
-  //addStringToImage("AaBbCcDdEeFfGgHhIiJjKkLlMmNn\nNnOoPpQqRrSsTtUuVvWwXxYyZz00\n00112233445566778899!!::;;,,..?\?(())~~", colorArray, width, abs(height), color, LINE_HEIGHT/2, LINE_HEIGHT/2);
+  //addStringToImage("AaBbCcDdEeFfGgHhIiJjKkLlMmNn\nNnOoPpQqRrSsTtUuVvWwXxYyZz00\n00112233445566778899!!::;;,,..?\?(())[[]]~~", colorArray, width, abs(height), color, LINE_HEIGHT/2, LINE_HEIGHT/2);
 
   //for(i=0;i<quoteLines;++i){
   addStringToImage(/*quote[i]*/names[quoteIndex], colorArray, width, abs(height), color, LINE_HEIGHT/2, currentY);
